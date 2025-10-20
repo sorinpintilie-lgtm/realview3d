@@ -160,6 +160,28 @@
   }
 }
 
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+  /* Reduce blur effects on mobile */
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+  
+  /* Disable complex animations on mobile */
+  .motion-reduce-mobile {
+    animation: none !important;
+    transition: opacity 0.2s ease !important;
+  }
+  
+  /* Optimize transforms */
+  * {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
 /* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -169,5 +191,14 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Performance: Reduce animations on low-end devices */
+@media (max-width: 768px) and (prefers-reduced-motion: no-preference) {
+  /* Simplify animations for better mobile performance */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
   }
 }

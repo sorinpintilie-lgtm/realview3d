@@ -26,45 +26,38 @@ const Hero = () => {
           <span className="text-white font-medium">3D Architectural Visualization</span>
         </motion.div>
         
-        {/* 3D Title with TM */}
-        <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight text-white relative">
-          {title.split('').map((char, index) => (
-            <motion.span
-              key={index}
-              className="inline-block"
-              initial={{
-                opacity: 0,
-                y: 50,
-                rotateX: -90,
-                filter: 'blur(10px)'
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                rotateX: 0,
-                filter: 'blur(0px)'
-              }}
-              transition={{
-                duration: 0.8,
-                delay: index * 0.05,
-                ease: [0.76, 0, 0.24, 1]
-              }}
-              whileHover={{
-                y: -5,
-                textShadow: '0 0 20px rgba(6, 182, 212, 0.8)',
-                transition: { duration: 0.2 }
-              }}
-              style={{
-                textShadow: '0 4px 8px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(6, 182, 212, 0.3)',
-                transform: 'translateZ(0)',
-                WebkitTextStroke: '1px rgba(6, 182, 212, 0.3)'
-              }}
-            >
-              {char}
-            </motion.span>
-          ))}
-          <sup className="text-2xl ml-1 opacity-70">™</sup>
-        </h1>
+        {/* 3D Title with TM - Simplified animation on mobile */}
+        <motion.h1
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight text-white relative"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          style={{
+            textShadow: '0 4px 8px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(6, 182, 212, 0.3)',
+          }}
+        >
+          {/* Desktop: Animated letters */}
+          <span className="hidden md:inline">
+            {title.split('').map((char, index) => (
+              <motion.span
+                key={index}
+                className="inline-block"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.03,
+                  ease: [0.76, 0, 0.24, 1]
+                }}
+              >
+                {char}
+              </motion.span>
+            ))}
+          </span>
+          {/* Mobile: Simple text */}
+          <span className="md:hidden">{title}</span>
+          <sup className="text-xl md:text-2xl ml-1 opacity-70">™</sup>
+        </motion.h1>
         
         {/* Subtitle - Floating Glass Card */}
         <motion.div

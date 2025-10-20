@@ -9,10 +9,10 @@ import { FaCube, FaEnvelope, FaPhone } from 'react-icons/fa';
 function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-800 via-gray-900 to-black">
-      {/* Unified Background with Animated Elements */}
+      {/* Unified Background with Animated Elements - Optimized for Mobile */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        {/* Animated 3D Grid */}
-        <div className="absolute inset-0 opacity-10">
+        {/* Animated 3D Grid - Hidden on mobile for performance */}
+        <div className="absolute inset-0 opacity-10 hidden md:block">
           <div className="absolute inset-0" style={{
             backgroundImage: `
               linear-gradient(rgba(6, 182, 212, 0.2) 1px, transparent 1px),
@@ -22,9 +22,9 @@ function HomePage() {
           }} />
         </div>
 
-        {/* Floating Blobs */}
+        {/* Floating Blobs - Reduced on mobile */}
         <motion.div
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/5 rounded-full"
+          className="absolute top-1/4 left-1/4 w-64 h-64 md:w-96 md:h-96 bg-cyan-500/5 rounded-full hidden md:block"
           animate={{
             scale: [1, 1.3, 1],
             x: [0, 100, 0],
@@ -39,7 +39,7 @@ function HomePage() {
         />
 
         <motion.div
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full"
+          className="absolute bottom-1/4 right-1/4 w-64 h-64 md:w-96 md:h-96 bg-blue-500/5 rounded-full hidden md:block"
           animate={{
             scale: [1, 1.4, 1],
             x: [0, -100, 0],
@@ -53,19 +53,8 @@ function HomePage() {
           style={{ filter: 'blur(100px)' }}
         />
 
-        <motion.div
-          className="absolute top-1/2 left-1/2 w-96 h-96 bg-cyan-400/5 rounded-full"
-          animate={{
-            scale: [1, 1.5, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: 'linear'
-          }}
-          style={{ filter: 'blur(120px)' }}
-        />
+        {/* Simple gradient overlay for mobile */}
+        <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-blue-500/5 md:hidden" style={{ filter: 'blur(60px)' }} />
       </div>
 
       {/* Content - All sections on same background */}

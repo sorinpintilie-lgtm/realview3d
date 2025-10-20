@@ -112,6 +112,8 @@ const Showcase3D = () => {
                       src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
                       animate={{
                         scale: hoveredCard === project.id ? 1.1 : 1,
                       }}

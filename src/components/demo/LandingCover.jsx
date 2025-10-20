@@ -9,15 +9,18 @@ const LandingCover = ({ onEnter }) => {
       exit={{ opacity: 0 }}
       className="fixed inset-0 flex items-center justify-center"
     >
-      {/* Background Video Loop - Blurred */}
+      {/* Background Video Loop - Blurred, optimized for mobile */}
       <div className="absolute inset-0 overflow-hidden">
+        {/* Static background for mobile, video for desktop */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900 md:hidden" />
         <video
-          className="absolute inset-0 w-full h-full object-cover scale-110"
+          className="absolute inset-0 w-full h-full object-cover scale-110 hidden md:block"
           style={{ filter: 'blur(8px)' }}
           autoPlay
           loop
           muted
           playsInline
+          loading="lazy"
         >
           <source src="/assets/video30sec/var2.mp4" type="video/mp4" />
         </video>

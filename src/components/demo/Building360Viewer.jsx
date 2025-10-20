@@ -268,33 +268,35 @@ const Building360Viewer = ({ onExit }) => {
             src={stopFrames[currentPart]}
             alt={`Building view ${currentPart}`}
             className="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
           />
 
-          {/* Navigation Arrows */}
+          {/* Navigation Arrows - Larger touch targets on mobile */}
           <button
             onClick={goToPreviousPart}
             disabled={isTransitioning}
-            className="absolute left-8 top-1/2 -translate-y-1/2 p-6 bg-black/70 backdrop-blur-xl hover:bg-cyan-600/20 rounded-full border border-cyan-500/30 text-white transition-all disabled:opacity-50 z-20"
+            className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 p-4 md:p-6 bg-black/70 backdrop-blur-xl hover:bg-cyan-600/20 rounded-full border border-cyan-500/30 text-white transition-all disabled:opacity-50 z-20 touch-manipulation"
           >
-            <FaChevronLeft className="w-8 h-8" />
+            <FaChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
           </button>
 
           <button
             onClick={goToNextPart}
             disabled={isTransitioning}
-            className="absolute right-8 top-1/2 -translate-y-1/2 p-6 bg-black/70 backdrop-blur-xl hover:bg-cyan-600/20 rounded-full border border-cyan-500/30 text-white transition-all disabled:opacity-50 z-20"
+            className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 p-4 md:p-6 bg-black/70 backdrop-blur-xl hover:bg-cyan-600/20 rounded-full border border-cyan-500/30 text-white transition-all disabled:opacity-50 z-20 touch-manipulation"
           >
-            <FaChevronRight className="w-8 h-8" />
+            <FaChevronRight className="w-6 h-6 md:w-8 md:h-8" />
           </button>
 
-          {/* See Inside Button */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
+          {/* See Inside Button - Better mobile sizing */}
+          <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-20">
             <button
               onClick={goInside}
               disabled={isTransitioning}
-              className="px-8 py-4 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-full transition-all shadow-lg shadow-cyan-500/50 hover:scale-105 disabled:opacity-50 flex items-center gap-2"
+              className="px-6 md:px-8 py-3 md:py-4 bg-cyan-500 hover:bg-cyan-600 text-white text-sm md:text-base font-semibold rounded-full transition-all shadow-lg shadow-cyan-500/50 hover:scale-105 disabled:opacity-50 flex items-center gap-2 touch-manipulation"
             >
-              <FaArrowUp />
+              <FaArrowUp className="w-4 h-4 md:w-5 md:h-5" />
               See Inside
             </button>
           </div>
@@ -328,7 +330,7 @@ const Building360Viewer = ({ onExit }) => {
         />
       )}
 
-      {/* TRANSITION IN - Going Up with Blur at End */}
+      {/* TRANSITION IN - Going Up with Blur at End - Optimized for mobile */}
       {mode === 'transition-in' && (
         <>
           <video
@@ -336,6 +338,7 @@ const Building360Viewer = ({ onExit }) => {
             autoPlay
             muted
             playsInline
+            preload="metadata"
             onTimeUpdate={(e) => {
               if (e.target.duration - e.target.currentTime < 0.3) {
                 setShowBlur(true);
@@ -357,23 +360,25 @@ const Building360Viewer = ({ onExit }) => {
           className="relative w-full h-full bg-black"
         >
           {/* Floor Plan Image */}
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center p-4">
             <img
               src={floorImages[currentFloor]}
               alt={`Floor plan ${currentFloor}`}
               className="max-w-full max-h-full object-contain"
+              loading="lazy"
+              decoding="async"
               onError={(e) => {
                 console.error('Failed to load floor image:', floorImages[currentFloor]);
               }}
             />
           </div>
 
-          {/* Floor Selector */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3 bg-black/70 backdrop-blur-xl px-6 py-4 rounded-full border border-cyan-500/30">
+          {/* Floor Selector - Mobile optimized */}
+          <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col md:flex-row gap-2 md:gap-3 bg-black/70 backdrop-blur-xl px-4 md:px-6 py-3 md:py-4 rounded-2xl md:rounded-full border border-cyan-500/30">
             <button
               onClick={() => changeFloor('floor2')}
               disabled={isTransitioning}
-              className={`px-6 py-2 rounded-full font-medium transition-all ${
+              className={`px-4 md:px-6 py-2 md:py-2 rounded-full font-medium transition-all text-sm md:text-base touch-manipulation ${
                 currentFloor === 'floor2'
                   ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/50'
                   : 'bg-white/10 text-white hover:bg-white/20'
@@ -384,7 +389,7 @@ const Building360Viewer = ({ onExit }) => {
             <button
               onClick={() => changeFloor('floor1')}
               disabled={isTransitioning}
-              className={`px-6 py-2 rounded-full font-medium transition-all ${
+              className={`px-4 md:px-6 py-2 md:py-2 rounded-full font-medium transition-all text-sm md:text-base touch-manipulation ${
                 currentFloor === 'floor1'
                   ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/50'
                   : 'bg-white/10 text-white hover:bg-white/20'
@@ -395,7 +400,7 @@ const Building360Viewer = ({ onExit }) => {
             <button
               onClick={() => changeFloor('floor0')}
               disabled={isTransitioning}
-              className={`px-6 py-2 rounded-full font-medium transition-all ${
+              className={`px-4 md:px-6 py-2 md:py-2 rounded-full font-medium transition-all text-sm md:text-base touch-manipulation ${
                 currentFloor === 'floor0'
                   ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/50'
                   : 'bg-white/10 text-white hover:bg-white/20'

@@ -46,12 +46,14 @@ const InteractiveDemo = () => {
           >
             {/* Demo Placeholder with 3D Effect */}
             <div className="relative aspect-video bg-gradient-to-br from-gray-900 to-black">
-              {/* Preview Image */}
+              {/* Preview Image - Lazy loaded */}
               <div className="absolute inset-0">
                 <img
                   src="/assets/panoramic 360/afara.jpg"
                   alt="Building Preview"
                   className="w-full h-full object-cover opacity-50"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
               </div>
