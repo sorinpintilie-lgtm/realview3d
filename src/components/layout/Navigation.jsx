@@ -101,9 +101,9 @@ const Navigation = () => {
         </div>
       </motion.nav>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Fixed positioning to prevent overlap */}
       <motion.div
-        className="lg:hidden fixed top-4 left-4 right-4 z-50 flex items-center justify-between"
+        className="lg:hidden fixed top-0 left-0 right-0 z-50 px-4 py-4"
         animate={{
           y: isVisible ? 0 : -100
         }}
@@ -111,66 +111,74 @@ const Navigation = () => {
           duration: 0.3,
           ease: [0.76, 0, 0.24, 1]
         }}
-        initial={{ y: -100 }}
+        initial={{ y: 0 }}
       >
-        {/* Logo */}
-        <motion.div
-          className="flex items-center gap-2 px-4 py-3 rounded-full"
-          style={{
-            background: scrolled 
-              ? 'rgba(255, 255, 255, 0.9)' 
-              : 'rgba(255, 255, 255, 0.1)',
-            backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255, 255, 255, 0.18)',
-          }}
-        >
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/50">
-            <FaCube className="text-white text-sm" />
-          </div>
-          <span className={`text-base font-semibold transition-colors ${scrolled ? 'text-gray-900' : 'text-white'}`}>
-            RealView3D
-          </span>
-        </motion.div>
+        <div className="flex items-center justify-between gap-3">
+          {/* Logo - Compact on mobile */}
+          <motion.div
+            className="flex items-center gap-2 px-3 py-2.5 rounded-full flex-shrink-0"
+            style={{
+              background: scrolled
+                ? 'rgba(255, 255, 255, 0.9)'
+                : 'rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.18)',
+            }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/50">
+              <FaCube className="text-white text-xs" />
+            </div>
+            <span className={`text-sm font-semibold transition-colors whitespace-nowrap ${scrolled ? 'text-gray-900' : 'text-white'}`}>
+              RealView3D
+            </span>
+          </motion.div>
 
-        {/* Hamburger Button with Liquid Glass */}
-        <motion.button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="relative w-12 h-12 rounded-full flex items-center justify-center touch-manipulation"
-          style={{
-            background: scrolled 
-              ? 'rgba(255, 255, 255, 0.9)' 
-              : 'rgba(255, 255, 255, 0.1)',
-            backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255, 255, 255, 0.18)',
-          }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <div className="w-5 h-4 flex flex-col justify-between">
-            <motion.span
-              className={`h-0.5 rounded-full ${scrolled ? 'bg-gray-900' : 'bg-white'}`}
-              animate={{
-                rotate: mobileMenuOpen ? 45 : 0,
-                y: mobileMenuOpen ? 7 : 0,
-              }}
-              transition={{ duration: 0.3 }}
-            />
-            <motion.span
-              className={`h-0.5 rounded-full ${scrolled ? 'bg-gray-900' : 'bg-white'}`}
-              animate={{
-                opacity: mobileMenuOpen ? 0 : 1,
-              }}
-              transition={{ duration: 0.2 }}
-            />
-            <motion.span
-              className={`h-0.5 rounded-full ${scrolled ? 'bg-gray-900' : 'bg-white'}`}
-              animate={{
-                rotate: mobileMenuOpen ? -45 : 0,
-                y: mobileMenuOpen ? -7 : 0,
-              }}
-              transition={{ duration: 0.3 }}
-            />
-          </div>
-        </motion.button>
+          {/* Hamburger Button with Liquid Glass */}
+          <motion.button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="relative w-11 h-11 rounded-full flex items-center justify-center touch-manipulation flex-shrink-0"
+            style={{
+              background: scrolled
+                ? 'rgba(255, 255, 255, 0.9)'
+                : 'rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.18)',
+            }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            <div className="w-5 h-4 flex flex-col justify-between">
+              <motion.span
+                className={`h-0.5 rounded-full ${scrolled ? 'bg-gray-900' : 'bg-white'}`}
+                animate={{
+                  rotate: mobileMenuOpen ? 45 : 0,
+                  y: mobileMenuOpen ? 7 : 0,
+                }}
+                transition={{ duration: 0.3 }}
+              />
+              <motion.span
+                className={`h-0.5 rounded-full ${scrolled ? 'bg-gray-900' : 'bg-white'}`}
+                animate={{
+                  opacity: mobileMenuOpen ? 0 : 1,
+                }}
+                transition={{ duration: 0.2 }}
+              />
+              <motion.span
+                className={`h-0.5 rounded-full ${scrolled ? 'bg-gray-900' : 'bg-white'}`}
+                animate={{
+                  rotate: mobileMenuOpen ? -45 : 0,
+                  y: mobileMenuOpen ? -7 : 0,
+                }}
+                transition={{ duration: 0.3 }}
+              />
+            </div>
+          </motion.button>
+        </div>
       </motion.div>
 
       {/* Mobile Menu Panel - Liquid Glass */}
